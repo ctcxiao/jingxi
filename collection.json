@@ -297,7 +297,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{port}}/orders/3?orderStatus=withdrawn",
+						"url": "http://{{IP}}:{{port}}/orders/5?orderStatus=withdrawn",
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -340,7 +340,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{port}}/orders/2",
+						"url": "http://{{IP}}:{{port}}/orders/1",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -501,7 +501,7 @@
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 204;"
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
 								]
 							}
 						}

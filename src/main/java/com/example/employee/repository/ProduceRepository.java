@@ -18,4 +18,9 @@ public interface ProduceRepository extends JpaRepository<Products, Integer> {
 
     @Query(value = "select * from products where name=?1 and description like %?2%", nativeQuery = true)
     Products findByDescriptionLikeAndName(String name, String description);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update Products set count=?1 where id=?2", nativeQuery = true)
+    void updateProductCount(int count, int id);
 }

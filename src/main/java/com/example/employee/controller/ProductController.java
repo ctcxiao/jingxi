@@ -5,6 +5,7 @@ import com.example.employee.entity.UpdateProEntity;
 import com.example.employee.repository.ProduceRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,5 +60,11 @@ public class ProductController {
         List<Products> productsList = new ArrayList<>();
         productsList.add(produceRepository.findByDescriptionLikeAndName(name, description));
         return new ResponseEntity<>(productsList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/inventories/{id}", method = RequestMethod.PUT)
+    public void updateProductCount(@PathVariable("id")int id, @RequestBody String body){
+        UpdateProEntity updateProEntity = new Gson().fromJson(body, UpdateProEntity.class);
+        produceRepository.updateProductCount(updateProEntity.getCount(), id);
     }
 }
