@@ -1,8 +1,7 @@
 package com.example.employee.controller;
 
-import com.example.employee.entity.OrderCreateEntity;
-import com.example.employee.entity.Orders;
-import com.example.employee.entity.ResponseOrders;
+import com.example.employee.entity.*;
+import com.example.employee.repository.LogisticsRecordsRepository;
 import com.example.employee.repository.OrderRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -22,6 +21,8 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private LogisticsRecordsRepository logisticsRecordsRepository;
 
     @RequestMapping(value = "/orders", method = RequestMethod.POST)
     public ResponseEntity<List<Orders>> createOrder(@RequestBody String body){
@@ -33,6 +34,9 @@ public class OrderController {
             Orders orders = new Orders(0,"", orderCreateEntity.getPurchaseCount(),
                     createTime, 30.30, 1, ""+orderCreateEntity.getProductId());
             orderRepository.save(orders);
+            LogisticsRecords logisticsRecords =  new LogisticsRecords(orders.getId(), orders.getTotalPrice(),
+                    orders.getUserId(), orders.getBuyTime(), "", orders.getOrderDetail());
+            logisticsRecordsRepository.save(logisticsRecords);
             ordersList.add(orders);
         });
         HttpHeaders responseHeader = new HttpHeaders();
@@ -61,7 +65,28 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public List<Orders> findOrdersBuUserId(@RequestParam("id") int id){
+    public List<Orders> findOrdersBuUserId(@RequestParam("userId") int id){
         return orderRepository.findAllByUserId(id);
     }
+
+    @RequestMapping(value = "/logisticsRecords/{id}", method = RequestMethod.GET)
+    public ResponseLogistics findLogistRecords(@PathVariable("id")int id){
+        LogisticsRecords logisticsRecords = logisticsRecordsRepository.findById(id).get();
+        String purchaseString = logisticsRecords.getPurchaseString();
+        List<Integer> purchaseItemList = new ArrayList<>();
+        for (int i = 0; i < purchaseString.length(); i++) {
+            purchaseItemList.add(purchaseString.charAt(i)-'0');
+        }
+        return new ResponseLogistics(logisticsRecords.getId(), logisticsRecords.getTotalPrice(), logisticsRecords.getUserId(), logisticsRecords.getCreateTime(),
+                logisticsRecords.getLogisticsStatus(), purchaseItemList);
+    }
+
+    @RequestMapping(value = "/logisticsRecords/{id}/orders/{id}", method = RequestMethod.PUT)
+    public ResponseEntity updateLogisticsStatus(@PathVariable("id")int id, @RequestParam("logisticsStatus") String logisticsStatus){
+        logisticsRecordsRepository.updateLogisticsStatus(logisticsStatus, id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+
+
 }

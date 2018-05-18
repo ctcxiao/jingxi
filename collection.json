@@ -340,7 +340,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{port}}/orders/2",
+						"url": "http://{{IP}}:{{port}}/orders/1",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -415,10 +415,10 @@
 									"",
 									"tests[\"Reponse data is object\"] = _.isObject(responseJSON);",
 									"tests['response has id'] = _.has(responseJSON, 'id');",
-									"tests['response has totalPrice'] = _.has(responseJSON, 'deliveryMan');",
-									"tests['response has userId'] = _.has(responseJSON, 'outboundTime');",
-									"tests['response has createTime'] = _.has(responseJSON, 'signedTime');",
-									"tests['response has purchaseItemList'] = _.has(responseJSON, 'logisticsStatus');",
+									"tests['response has totalPrice'] = _.has(responseJSON, 'totalPrice');",
+									"tests['response has userId'] = _.has(responseJSON, 'userId');",
+									"tests['response has createTime'] = _.has(responseJSON, 'createTime');",
+									"tests['response has purchaseItemList'] = _.has(responseJSON, 'purchaseItemList');",
 									"tests[\"Status code is 200\"] = responseCode.code === 200;",
 									""
 								]
@@ -451,29 +451,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "http://{{IP}}:{{port}}/logisticsRecords/1/orders/1?logisticsStatus=shipping",
-							"protocol": "http",
-							"IP": [
-								"{{IP}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"logisticsRecords",
-								"1",
-								"orders",
-								"1"
-							],
-							"query": [
-								{
-									"key": "logisticsStatus",
-									"value": "shipping",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{IP}}:{{port}}/logisticsRecords/1/orders/1?logisticsStatus=shipping",
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -498,29 +476,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "http://{{IP}}:{{port}}/logisticsRecords/1/orders/1?logisticsStatus=signed",
-							"protocol": "http",
-							"IP": [
-								"{{IP}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"logisticsRecords",
-								"1",
-								"orders",
-								"1"
-							],
-							"query": [
-								{
-									"key": "logisticsStatus",
-									"value": "signed",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{IP}}:{{port}}/logisticsRecords/1/orders/1?logisticsStatus=signed",
 						"method": "PUT",
 						"header": [],
 						"body": {
