@@ -212,30 +212,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "http://{{IP}}:{{port}}/products?name=方便面&description=师",
-							"protocol": "http",
-							"IP": "{{IP}}",
-							"port": "{{port}}",
-							"path": [
-								"products"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "方便面",
-									"equals": true,
-									"description": ""
-								},
-								{
-									"key": "description",
-									"value": "师",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{IP}}:{{port}}/products?name=方便面&description=师",
 						"method": "GET",
 						"header": [],
 						"body": {},
