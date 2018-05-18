@@ -1,7 +1,7 @@
 package com.example.employee.controller;
 
 import com.example.employee.entity.Products;
-import com.example.employee.entity.UpdateEntity;
+import com.example.employee.entity.UpdateProEntity;
 import com.example.employee.repository.ProduceRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class ProductController {
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public ResponseEntity<Products> createNewProduct(@RequestBody String body) {
-        UpdateEntity updateEntity = new Gson().fromJson(body, UpdateEntity.class);
+        UpdateProEntity updateEntity = new Gson().fromJson(body, UpdateProEntity.class);
         Products products = new Products(0, updateEntity.getName(), updateEntity.getDescription(), updateEntity.getPrice(), 0);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("location", "jingxi");
@@ -42,7 +42,7 @@ public class ProductController {
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
     public ResponseEntity updateProduct(@PathVariable("id") int id, @RequestBody String body) {
-        UpdateEntity updateEntity = new Gson().fromJson(body, UpdateEntity.class);
+        UpdateProEntity updateEntity = new Gson().fromJson(body, UpdateProEntity.class);
         produceRepository.updateProduct(updateEntity.getName(), updateEntity.getDescription(), updateEntity.getPrice(), id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

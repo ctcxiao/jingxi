@@ -272,27 +272,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "http://{{IP}}:{{port}}/orders/1?orderStatus=paid",
-							"protocol": "http",
-							"IP": [
-								"{{IP}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"orders",
-								"1"
-							],
-							"query": [
-								{
-									"key": "orderStatus",
-									"value": "paid",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{IP}}:{{port}}/orders/1?orderStatus=paid",
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -317,27 +297,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "http://{{IP}}:{{port}}/orders/5?orderStatus=withdrawn",
-							"protocol": "http",
-							"IP": [
-								"{{IP}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"orders",
-								"5"
-							],
-							"query": [
-								{
-									"key": "orderStatus",
-									"value": "withdrawn",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{IP}}:{{port}}/orders/5?orderStatus=withdrawn",
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -417,26 +377,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "http://{{IP}}:{{port}}/orders?userId=1",
-							"protocol": "http",
-							"IP": [
-								"{{IP}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"orders"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": "1",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{IP}}:{{port}}/orders?userId=1",
 						"method": "GET",
 						"header": [],
 						"body": {
