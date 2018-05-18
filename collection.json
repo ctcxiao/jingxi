@@ -340,7 +340,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{port}}/orders/1",
+						"url": "http://{{IP}}:{{port}}/orders/2",
 						"method": "GET",
 						"header": [],
 						"body": {
