@@ -180,10 +180,6 @@
 						"url": {
 							"raw": "http://{{IP}}:{{port}}/products?name=方便面",
 							"protocol": "http",
-							"IP": [
-								"{{IP}}"
-							],
-							"port": "{{port}}",
 							"path": [
 								"products"
 							],
@@ -234,10 +230,6 @@
 						"url": {
 							"raw": "http://{{IP}}:{{port}}/products?name=方便面&description=师",
 							"protocol": "http",
-							"IP": [
-								"{{IP}}"
-							],
-							"port": "{{port}}",
 							"path": [
 								"products"
 							],
