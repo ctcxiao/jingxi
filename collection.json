@@ -177,24 +177,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "http://{{IP}}:{{port}}/products?name=方便面",
-							"protocol": "http",
-							"IP": "{{IP}}",
-							"port": "{{port}}",
-							"path": [
-								"products"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "方便面",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{IP}}:{{port}}/products?name=方便面",
 						"method": "GET",
 						"header": [],
 						"body": {},
