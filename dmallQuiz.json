@@ -11,7 +11,7 @@
     {
       "enabled": true,
       "key": "port",
-      "value": "8083",
+      "value": "9999",
       "type": "text"
     }
   ],
