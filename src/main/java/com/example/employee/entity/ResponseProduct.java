@@ -1,39 +1,23 @@
 package com.example.employee.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import java.util.List;
 
-@Entity
-@Table(name = "Products")
-public class Products implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ResponseProduct {
     private int id;
 
     private String name;
     private String description;
     private double price;
     private int count;
-    private String userId;
+    private List<Integer> inventory;
 
-    public Products(int id, String userId, String name, String description, double price, int count) {
+    public ResponseProduct(int id, String name, String description, double price, int count, List<Integer> inventory) {
         this.id = id;
-        this.userId = userId;
         this.name = name;
         this.description = description;
         this.price = price;
         this.count = count;
-    }
-
-    public Products() {
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+        this.inventory = inventory;
     }
 
     public int getId() {
@@ -75,4 +59,14 @@ public class Products implements Serializable{
     public void setCount(int count) {
         this.count = count;
     }
+
+    public List<Integer> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(List<Integer> inventory) {
+        this.inventory = inventory;
+    }
+
+
 }

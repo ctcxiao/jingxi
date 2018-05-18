@@ -1,6 +1,7 @@
 package com.example.employee.controller;
 
 import com.example.employee.entity.Products;
+import com.example.employee.entity.ResponseProduct;
 import com.example.employee.entity.UpdateProEntity;
 import com.example.employee.repository.ProduceRepository;
 import com.google.gson.Gson;
@@ -20,12 +21,19 @@ public class ProductController {
     private ProduceRepository produceRepository;
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public ResponseEntity<Products> createNewProduct(@RequestBody String body) {
+    public ResponseEntity<ResponseProduct> createNewProduct(@RequestBody String body) {
         UpdateProEntity updateEntity = new Gson().fromJson(body, UpdateProEntity.class);
-        Products products = new Products(0, updateEntity.getName(), updateEntity.getDescription(), updateEntity.getPrice(), 0);
+        Products products = new Products(0, "",updateEntity.getName(), updateEntity.getDescription(), updateEntity.getPrice(), 0);
+        String purchaseUserId = products.getUserId();
+        List<Integer> purchaseItemList = new ArrayList<>();
+        for (int i = 0; i < purchaseUserId.length(); i++) {
+            purchaseItemList.add(purchaseUserId.charAt(i) - '0');
+        }
+        ResponseProduct responseProduct = new ResponseProduct(products.getId(), products.getName(), products.getDescription(),
+                products.getPrice(), products.getCount(), purchaseItemList);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("location", "jingxi");
-        ResponseEntity<Products> responseEntity = new ResponseEntity<>(products,responseHeaders, HttpStatus.CREATED);
+        ResponseEntity<ResponseProduct> responseEntity = new ResponseEntity<>(responseProduct,responseHeaders, HttpStatus.CREATED);
         produceRepository.save(products);
         return responseEntity;
 
@@ -37,8 +45,15 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
-    public Products findOne(@PathVariable("id") int id) {
-        return produceRepository.findById(id).get();
+    public ResponseProduct findOne(@PathVariable("id") int id) {
+        Products products = produceRepository.findById(id).get();
+        String purchaseUserId = products.getUserId();
+        List<Integer> purchaseItemList = new ArrayList<>();
+        for (int i = 0; i < purchaseUserId.length(); i++) {
+            purchaseItemList.add(purchaseUserId.charAt(i) - '0');
+        }
+        return new ResponseProduct(products.getId(), products.getName(), products.getDescription(),
+                products.getPrice(), products.getCount(), purchaseItemList);
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
